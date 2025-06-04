@@ -1,0 +1,91 @@
+
+/* 
+ * GeoLinker Library
+ * Copyright (C) 2025 Jobit Joseph, Semicon Media Pvt Ltd (Circuit Digest)
+ * Author: Jobit Joseph
+ * Project: GeoLinker Cloud API Library
+ *
+ * Licensed under the MIT License
+ * You may not use this file except in compliance with the License.
+ * 
+ * You may obtain a copy of the License at:
+ * https://opensource.org/license/mit/
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software (the "Software") and associated documentation files, to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, subject to the following additional conditions:
+
+ * 1. All copies or substantial portions must retain:  
+ *    - The original copyright notice  
+ *    - A prominent statement crediting the original author/creator  
+
+ * 2. Modified versions must:  
+ *    - Clearly mark the changes as their own  
+ *    - Preserve all original credit notices
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+ {
+  "name": "GeoLinker",
+  "version": "1.0.0",
+  "description": "A library for sending GPS and sensor data to the GeoLinker Cloud API with WiFi connectivity and offline storage support. Supports ESP32, ESP8266, Raspberry Pi Pico W/Pico 2W, and Arduino UNO R4 WiFi.",
+  "keywords": "gps, geolocation, wifi, iot, esp32, esp8266, pico, rp2040, uno r4",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Circuit-Digest/GeoLinker.git"
+  },
+  "authors": [
+    {
+      "name": "Jobit Joseph",
+      "email": "jobitjoseph1@gmail.com",
+      "url": "https://github.com/jobitjoseph,
+      "maintainer": true
+    }
+    {
+      "name": "Circuit Digest",
+      "email": "contact@circuitdigest.com",
+      "url": "https://www.circuitdigest.com",
+      "maintainer": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://www.circuitdigest.cloud",
+  "frameworks": "arduino",
+  "platforms": [
+    "espressif8266",
+    "espressif32",
+    "renesas",
+    "rp2040"
+  ],
+  "dependencies": [
+    {
+      "name": "ArduinoJson",
+      "version": ">=7.0.0"
+    },
+    {
+      "name": "WiFiS3",
+      "platforms": ["renesas"],
+      "version": ">=1.0.0"
+    },
+    {
+      "name": "WiFiEspAT",
+      "platforms": ["*"],
+      "version": ">=1.0.0"
+    }
+  ],
+  "export": {
+    "exclude": [
+      "tests",
+      "examples",
+      "docs"
+    ]
+  }
+}
