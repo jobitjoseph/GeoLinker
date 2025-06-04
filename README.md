@@ -115,53 +115,122 @@ void setup() {
 ### Minimal Example
 ```cpp
 #include <GeoLinker.h>
+GeoLinker geo; // Create GeoLinker instance
 
-GeoLinker geo;
-HardwareSerial GPS(1);
+// ==================================================================
+//                   HARDWARE CONFIGURATION
+// ==================================================================
 
+/* ----- Option 1: ESP32 with Custom Pins ----- */
+HardwareSerial GPS(1);  // Using Serial1
+#define GPS_RX 16       // GPIO16 for RX
+#define GPS_TX 17       // GPIO17 for TX
+
+/* ----- Option 2: Standard Hardware Serial (for Uno R4 WiFi, Pico W) ----- */
+// HardwareSerial& GPS = Serial1;  // Uses default pins:
+                                  // Uno R4 WiFi: RX= D0, TX= D1
+                                  // Pico W/2W: TX= 0, RX= 1 
+
+/* ----- Option 3: Software Serial (for ESP8266 etc) ----- */
+// #include <SoftwareSerial.h>
+// #define GPS_RX 14      // Custom RX pin
+// #define GPS_TX 12      // Custom TX pin
+// SoftwareSerial GPS(GPS_RX, GPS_TX);  // RX, TX pins (avoid conflict pins)
+
+// Common GPS Settings
+#define GPS_BAUD 9600   // Standard NMEA baud rate
+
+// ==================================================================
+//                   NETWORK CONFIGURATION
+// ==================================================================
+const char* ssid = "WiFi_SSID";       // Your network name
+const char* password = "WiFi_Password"; // Your network password
+
+// ==================================================================
+//                   GeoLinker CONFIGURATION
+// ==================================================================
+const char* apiKey = "FhBOTY5zL7SE";  // Your GeoLinker API key
+const char* deviceID = "weather_tracker"; // Unique device identifier
+const uint16_t updateInterval = 10;   // Data upload interval (seconds)
+const DebugLevel debugLevel = DEBUG_VERBOSE; //// Debug verbosity: DEBUG_NONE, DEBUG_BASIC, DEBUG_VERBOSE
+const bool enableOfflineStorage = true; // Enable offline data storage
+const bool enableAutoReconnect = true;  // Enable auto-reconnect
+const int8_t timeOffsetHours = 5;      // Timezone hours (e.g., 5 for IST (5.30))
+const int8_t timeOffsetMinutes = 30;   // Timezone minutes (e.g., 30 for IST (5.30))
+
+// ==================================================================
+//                   SETUP FUNCTION
+// ==================================================================
 void setup() {
-    Serial.begin(115200);
-    GPS.begin(9600, SERIAL_8N1, 16, 17); // ESP32 example
-    
-    geo.begin(GPS);
-    geo.setApiKey("YOUR_API_KEY");
-    geo.setDeviceID("my_tracker");
-    geo.setWiFiCredentials("WiFi_SSID", "WiFi_Password");
-    
-    if (!geo.connectToWiFi()) {
-        Serial.println("WiFi connection failed!");
-    }
+  // initialise debug serial
+  Serial.begin(115200);
+  delay(1000);  // Give serial monitor time to connect
+
+  // initialise GPS connection
+  GPS.begin(GPS_BAUD, SERIAL_8N1, GPS_RX, GPS_TX); // For custom hardware serial
+  // GPS.begin(GPS_BAUD);  // For predefined hardware/software serial
+
+  // initialise GeoLinker service
+  geo.begin(GPS);
+
+  /* Configure GeoLinker parameters */
+  geo.setApiKey(apiKey);
+  geo.setDeviceID(deviceID);
+  geo.setUpdateInterval_seconds(updateInterval);
+  geo.setDebugLevel(debugLevel);
+  geo.enableOfflineStorage(enableOfflineStorage);
+  geo.enableAutoReconnect(enableAutoReconnect);
+  geo.setTimeOffset(timeOffsetHours, timeOffsetMinutes);
+  geo.setWiFiCredentials(ssid, password);// initialise WiFi
+
+  //  Establish WiFi connection
+if (!geo.connectToWiFi()) {
+Serial.println("Failed to connect to WiFi");
 }
 
+  Serial.println("GeoLinker setup complete");
+}
+
+// ==================================================================
+//                   MAIN PROGRAM LOOP
+// ==================================================================
 void loop() {
-    uint8_t status = geo.loop();
-    
-    if (status == 1) {
-        Serial.println("Data sent successfully!");
-    }
-    
-    delay(1000);
-}
-```
+  // Example sensor payloads (optional - up to 5 payloads)
+  geo.setPayloads({
+    {"temperature", 25.0},
+    {"humidity", 60.0}
+  });
 
-### Advanced Configuration
-```cpp
-void setup() {
-    // ... GPS and basic setup ...
-    
-    geo.setUpdateInterval_seconds(30);        // Upload every 30 seconds
-    geo.setDebugLevel(DEBUG_VERBOSE);         // Enable detailed logging
-    geo.enableOfflineStorage(true);          // Enable offline buffering
-    geo.enableAutoReconnect(true);           // Enable auto-reconnection
-    geo.setTimeOffset(5, 30);                // IST timezone (UTC+5:30)
-    geo.setBatteryLevel(85);                 // Report battery level
-    
-    // Add sensor data
-    geo.setPayloads({
-        {"temperature", 25.5},
-        {"humidity", 60.0},
-        {"pressure", 1013.25}
-    });
+  // Example battery level (optional)
+  geo.setBatteryLevel(87);
+  
+  // ==========================================
+  //         GEO LINKER OPERATION
+  // ==========================================
+  uint8_t status = geo.loop();
+  
+  if (status > 0) { 
+    Serial.print("Status: ");
+    switch(status) {
+      case 1:
+        Serial.println("Data sent successfully to GeoLinker!");
+        break;
+      case 2:
+        Serial.println("GPS connection error!");
+        break;
+      case 3:
+        Serial.println("Connection error - data saved to offline buffer!");
+        break;
+      case 4:
+        Serial.println("Data format error!");
+        break;
+      case 5:
+        Serial.println("Invalid GPS data (cold boot may need time)!");
+        break;
+      default:
+        Serial.println("Unknown status code");
+    }
+  }
 }
 ```
 
@@ -170,7 +239,7 @@ void setup() {
 ### Core Methods
 
 #### `bool begin(Stream& serial)`
-Initialize the library with GPS serial connection.
+Initialise the library with GPS serial connection.
 - **Parameters**: `serial` - GPS serial interface
 - **Returns**: `true` if successful
 
