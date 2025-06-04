@@ -68,7 +68,7 @@ const char* password = "WiFi_Password"; // Your network password
 // ==================================================================
 //                   GeoLinker CONFIGURATION
 // ==================================================================
-const char* apiKey = "FhBOTY5zL7SE";  // Your GeoLinker API key
+const char* apiKey = "FhBxxxxxxxxx";  // Your GeoLinker API key
 const char* deviceID = "weather_tracker"; // Unique device identifier
 const uint16_t updateInterval = 10;   // Data upload interval (seconds)
 const DebugLevel debugLevel = DEBUG_VERBOSE; //// Debug verbosity: DEBUG_NONE, DEBUG_BASIC, DEBUG_VERBOSE
