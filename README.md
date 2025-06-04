@@ -87,7 +87,7 @@ void setup() {
 }
 ```
 
-### Option 2: Standard Hardware Serial (Uno R4 WiFi, Pico W)
+### Option 2: Standard Hardware Serial (Uno R4 WiFi, Pico W, Pico 2W)
 ```cpp
 HardwareSerial& GPS = Serial1;  // Default pins:
                                // Uno R4 WiFi: RX=D0, TX=D1
