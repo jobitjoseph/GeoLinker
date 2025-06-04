@@ -23,7 +23,7 @@ A comprehensive Arduino library for GPS tracking and cloud data transmission, de
 - WiFi connectivity
 
 ### Software Dependencies
-- **ArduinoJson** library (version 6.x or later)
+- **ArduinoJson** library (version 7.x or later)
 - Platform-specific WiFi libraries (automatically included)
 
 ## 🔧 Installation
@@ -39,7 +39,7 @@ A comprehensive Arduino library for GPS tracking and cloud data transmission, de
    - Click "Install" on the GeoLinker library by Jobit Joseph
 4. **Install Dependencies**
    - The ArduinoJson dependency should install automatically
-   - If not, search for "ArduinoJson" and install it manually
+   - If not, search for "ArduinoJson" and install it manually (version 7.x or later)
 5. **Include in Your Sketch**
    ```cpp
    #include <GeoLinker.h>
@@ -64,13 +64,12 @@ A comprehensive Arduino library for GPS tracking and cloud data transmission, de
      └── GeoLinker.cpp
      ```
 
-## 🔧 Usage
-1. **Install Dependencies**
+4. **Install Dependencies**
    ```
-   Tools → Manage Libraries → Search for "ArduinoJson" → Install
+   Tools → Manage Libraries → Search for "ArduinoJson" → Install (version 7.x or later)
    ```
 
-2. **Include in Your Sketch**
+5. **Include in Your Sketch**
    ```cpp
    #include <GeoLinker.h>
    ```
