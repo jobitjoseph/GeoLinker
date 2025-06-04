@@ -110,7 +110,7 @@ void setup() {
 }
 ```
 
-## 📝 Basic Usage
+## 📝 Usage
 
 ### Minimal Example
 ```cpp
