@@ -1,8 +1,8 @@
 {
   "name": "GeoLinker",
-  "version": "1.0.0",
-  "description": "A library for sending GPS and sensor data to the GeoLinker Cloud API with WiFi connectivity and offline storage support. Supports ESP32, ESP8266, Raspberry Pi Pico W/Pico 2W, and Arduino UNO R4 WiFi.",
-  "keywords": "gps, geolocation, wifi, iot, esp32, esp8266, pico, rp2040, uno r4",
+  "version": "1.0.2",
+  "description": "A comprehensive library for GPS tracking and cloud data transmission with WiFi/GSM support. Features offline storage, automatic reconnection, and multi-platform compatibility.",
+  "keywords": "gps, geolocation, wifi, gsm, iot, esp32, esp8266, pico, rp2040, uno r4, sim800l",
   "repository": {
     "type": "git",
     "url": "https://github.com/Circuit-Digest/GeoLinker.git"
@@ -13,7 +13,7 @@
       "email": "jobitjoseph1@gmail.com",
       "url": "https://github.com/jobitjoseph",
       "maintainer": true
-    }
+    },
     {
       "name": "Circuit Digest",
       "email": "contact@circuitdigest.com",
@@ -22,13 +22,14 @@
     }
   ],
   "license": "MIT",
-  "homepage": "https://www.circuitdigest.cloud",
+  "homepage": "https://www.circuitdigest.cloud/geolinker",
   "frameworks": "arduino",
   "platforms": [
     "espressif8266",
     "espressif32",
     "renesas",
-    "rp2040"
+    "rp2040",
+    "atmelavr"
   ],
   "dependencies": [
     {
@@ -43,6 +44,11 @@
     {
       "name": "WiFiEspAT",
       "platforms": ["*"],
+      "version": ">=1.0.0"
+    },
+    {
+      "name": "SoftwareSerial",
+      "platforms": ["atmelavr"],
       "version": ">=1.0.0"
     }
   ],
