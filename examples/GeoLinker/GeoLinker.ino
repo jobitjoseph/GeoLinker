@@ -189,6 +189,4 @@ void loop() {
       default: Serial.println("Unknown status code.");
     }
   }
-
-  delay(100);
 }
