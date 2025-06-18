@@ -1,6 +1,6 @@
 # GeoLinker
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
-![Platforms](https://img.shields.io/badge/Platforms-ESP32%20%7C%20ESP8266%20%7C%20Arduino%20Uno%20R4%20WiFi%20%7C%20RPi%20Pico%20W-green)
+![Platforms](https://img.shields.io/badge/Platforms-ESP32%20%7C%20ESP8266%20%7C%20Arduino%20Uno%20R4%20WiFi%20%7C%20RPi%20Pico%20W%20%7C%20Arduino-green)
 ![Version](https://img.shields.io/badge/Version-1.0.2-brightgreen)
 
 GeoLinker Cloud API Library
