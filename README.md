@@ -298,86 +298,86 @@ void loop() {
 
 ## 🔧 API Reference
 
-# GeoLinker API Reference
+### GeoLinker API Reference
 
-## Common Methods
+### Common Methods
 
-### `void setApiKey(const String& key)`
+#### `void setApiKey(const String& key)`
 Set your GeoLinker API key.  
 - **Parameters:** `key` — API key string
 
-### `void setDeviceID(const String& id)`
+#### `void setDeviceID(const String& id)`
 Set the unique device identifier.  
 - **Parameters:** `id` — Device name or ID
 
-### `void setUpdateInterval_seconds(uint32_t interval_s)`
+#### `void setUpdateInterval_seconds(uint32_t interval_s)`
 Set data upload interval (in seconds).  
 - **Parameters:** `interval_s` — Interval in seconds (default: 60)
 
-### `void setDebugLevel(uint8_t level)`
+#### `void setDebugLevel(uint8_t level)`
 Set debug verbosity.  
 - **Parameters:** `level` — `DEBUG_NONE` (0), `DEBUG_BASIC` (1), `DEBUG_VERBOSE` (2)
 
-### `void enableOfflineStorage(bool enable)`
+#### `void enableOfflineStorage(bool enable)`
 Enable/disable offline data buffering.  
 - **Parameters:** `enable` — `true` to enable
 
-### `void enableAutoReconnect(bool enable)`
+#### `void enableAutoReconnect(bool enable)`
 Enable/disable automatic reconnection (WiFi or GSM).  
 - **Parameters:** `enable` — `true` to enable
 
-### `void setPayloads(const std::map<String, float>& payloads)`
+#### `void setPayloads(const std::map<String, float>& payloads)`
 Set additional sensor data.  
 - **Parameters:** `payloads` — Map of sensor names/values (max 5)
 
-### `void setBatteryLevel(uint8_t percent)`
+#### `void setBatteryLevel(uint8_t percent)`
 Set battery level for reporting.  
 - **Parameters:** `percent` — Battery % (0–100)
 
-### `void setTimeOffset(int hourOffset, int minuteOffset)`
+#### `void setTimeOffset(int hourOffset, int minuteOffset)`
 Set timezone offset from UTC.  
 - **Parameters:**  
   - `hourOffset` (int): Hours offset  
   - `minuteOffset` (int): Minutes offset
 
-### `void setOfflineBufferLimit(uint8_t limit)`
+#### `void setOfflineBufferLimit(uint8_t limit)`
 Set offline buffer size.  
 - **Parameters:** `limit` — Max entries (default: 100)
 
-### `void setNetworkMode(NetworkBackendType mode)`
+#### `void setNetworkMode(NetworkBackendType mode)`
 Set backend to WiFi or GSM/Cellular.  
 - **Parameters:** `mode` — `GEOLINKER_WIFI` or `GEOLINKER_CELLULAR`
 
-### `uint8_t loop()`
+#### `uint8_t loop()`
 Main library function; call regularly in your loop.  
 - **Returns:** Status code (see Status Codes table)
 
 ---
 
-## WiFi Related Methods
+### WiFi Related Methods
 
-### `void setWiFiCredentials(const char* ssid, const char* password)`
+#### `void setWiFiCredentials(const char* ssid, const char* password)`
 Set WiFi credentials.  
 - **Parameters:**  
   - `ssid`: WiFi network name  
   - `password`: WiFi password
 
-### `bool connectToWiFi()`
+#### `bool connectToWiFi()`
 Connect to WiFi using stored credentials.  
 - **Returns:** `true` if connected successfully
 
 ---
 
-## GSM/Cellular Related Methods
+### GSM/Cellular Related Methods
 
-### `void setModemCredentials(const char* apn, const char* user = nullptr, const char* pass = nullptr)`
+#### `void setModemCredentials(const char* apn, const char* user = nullptr, const char* pass = nullptr)`
 Set APN/credentials for GSM modem.  
 - **Parameters:**  
   - `apn`: Access Point Name  
   - `user`: Username (optional)  
   - `pass`: Password (optional)
 
-### `void beginModem(Stream& serial, uint8_t powerPin = 255, uint8_t resetPin = 255, bool autoPowerCycle = false)`
+#### `void beginModem(Stream& serial, uint8_t powerPin = 255, uint8_t resetPin = 255, bool autoPowerCycle = false)`
 Initialise GSM modem interface.  
 - **Parameters:**  
   - `serial`: Serial interface for modem  
@@ -385,25 +385,25 @@ Initialise GSM modem interface.
   - `resetPin`: (Optional) Modem reset pin  
   - `autoPowerCycle`: (Optional) Power cycle at startup
 
-### `void setModemTimeouts(uint32_t commandTimeoutMs = 5000, uint32_t httpTimeoutMs = 10000)`
+#### `void setModemTimeouts(uint32_t commandTimeoutMs = 5000, uint32_t httpTimeoutMs = 10000)`
 Configure GSM modem timeouts.  
 - **Parameters:**  
   - `commandTimeoutMs`: AT command timeout  
   - `httpTimeoutMs`: HTTP timeout
 
-### `int getModemNetworkStatus()`
+#### `int getModemNetworkStatus()`
 Get modem network registration status.  
 - **Returns:** Registration status code
 
-### `int getModemGprsStatus()`
+#### `int getModemGprsStatus()`
 Get modem GPRS context status.  
 - **Returns:** 1 if attached, 0 otherwise
 
 ---
 
-## GPS Related Methods
+### GPS Related Methods
 
-### `bool begin(Stream& serial)`
+#### `bool begin(Stream& serial)`
 Initialise GeoLinker with GPS serial connection.  
 - **Parameters:** `serial` — Serial stream (e.g. `Serial1`, `SoftwareSerial`)  
 - **Returns:** `true` if successful
