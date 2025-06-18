@@ -45,7 +45,7 @@ HardwareSerial gpsSerial(1);  // Using Serial1
 #define GPS_TX 17       // GPIO17 for TX
 
 /* ----- Option 2: Standard Hardware Serial (for Uno R4 WiFi, Pico W) ----- */
-// HardwareSerial& GPS = Serial1;  // Uses default pins:
+// HardwareSerial& gpsSerial = Serial1;  // Uses default pins:
                                   // Uno R4 WiFi: RX= D0, TX= D1
                                   // Pico W/2W: TX= 0, RX= 1 
 
@@ -53,7 +53,7 @@ HardwareSerial gpsSerial(1);  // Using Serial1
 // #include <SoftwareSerial.h>
 // #define GPS_RX 14      // Custom RX pin
 // #define GPS_TX 12      // Custom TX pin
-// SoftwareSerial GPS(GPS_RX, GPS_TX);  // RX, TX pins (avoid conflict pins)
+// SoftwareSerial gpsSerial(GPS_RX, GPS_TX);  // RX, TX pins (avoid conflict pins)
 
 // Common GPS Settings
 #define GPS_BAUD 9600   // Standard NMEA baud rate
@@ -68,13 +68,13 @@ HardwareSerial gsmSerial(2);  // Using Serial2
 #define GSM_TX 19       // GPIO19 for TX
 
 /* ----- Option 2: Standard Hardware Serial (for Uno R4 WiFi, Pico W) ----- */
-// HardwareSerial& GSM = Serial2;  // Uses default pins where available
+// HardwareSerial& gsmSerial = Serial2;  // Uses default pins where available
 
 /* ----- Option 3: Software Serial (for basic boards) ----- */
 // #include <SoftwareSerial.h>
 // #define GSM_RX 5       // Custom RX pin
 // #define GSM_TX 6       // Custom TX pin
-// SoftwareSerial GSM(GSM_RX, GSM_TX);
+// SoftwareSerial gsmSerial(GSM_RX, GSM_TX);
 
 // Common GSM Settings
 #define GSM_BAUD 9600   // Standard modem baud rate
