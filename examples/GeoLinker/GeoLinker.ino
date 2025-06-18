@@ -39,7 +39,7 @@
 //                   GPS SERIAL CONFIGURATION
 // ==================================================================
 
-/* ----- Option 1: ESP32 with Custom Pins ----- */
+/* ----- Option 1: Hardware Serial with Custom Pins ----- */
 HardwareSerial gpsSerial(1);  // Using Serial1
 #define GPS_RX 16       // GPIO16 for RX
 #define GPS_TX 17       // GPIO17 for TX
