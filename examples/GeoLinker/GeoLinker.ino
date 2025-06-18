@@ -62,7 +62,7 @@ HardwareSerial gpsSerial(1);  // Using Serial1
 //                   GSM SERIAL CONFIGURATION
 // ==================================================================
 
-/* ----- Option 1: ESP32 with Custom Pins ----- */
+/* ----- Option 1: Hardware Serial with Custom Pins ----- */
 HardwareSerial gsmSerial(2);  // Using Serial2
 #define GSM_RX 18       // GPIO18 for RX
 #define GSM_TX 19       // GPIO19 for TX
