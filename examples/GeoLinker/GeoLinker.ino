@@ -40,14 +40,14 @@
 // ==================================================================
 
 /* ----- Option 1: Hardware Serial with Custom Pins ----- */
-HardwareSerial gpsSerial(1);  // Using Serial1
-#define GPS_RX 16       // GPIO16 for RX
-#define GPS_TX 17       // GPIO17 for TX
+#define gpsSerial Serial2  // UART1
+#define GPS_RX 4       
+#define GPS_TX 5       
 
-/* ----- Option 2: Standard Hardware Serial (for Uno R4 WiFi, Pico W) ----- */
-// HardwareSerial& gpsSerial = Serial1;  // Uses default pins:
+/* ----- Option 2: Standard Hardware Serial (for Uno R4 WiFi) ----- */
+//HardwareSerial & gpsSerial = Serial2;  // Uses default pins:
                                   // Uno R4 WiFi: RX= D0, TX= D1
-                                  // Pico W/2W: TX= 0, RX= 1 
+                                  
 
 /* ----- Option 3: Software Serial (for ESP8266 etc) ----- */
 // #include <SoftwareSerial.h>
@@ -63,12 +63,12 @@ HardwareSerial gpsSerial(1);  // Using Serial1
 // ==================================================================
 
 /* ----- Option 1: Hardware Serial with Custom Pins ----- */
-HardwareSerial gsmSerial(2);  // Using Serial2
-#define GSM_RX 18       // GPIO18 for RX
-#define GSM_TX 19       // GPIO19 for TX
+#define gsmSerial Serial1  // UART0
+#define GSM_RX 0
+#define GSM_TX 1
 
-/* ----- Option 2: Standard Hardware Serial (for Uno R4 WiFi, Pico W) ----- */
-// HardwareSerial& gsmSerial = Serial2;  // Uses default pins where available
+/* ----- Option 2: Standard Hardware Serial (for Uno R4 WiFi) ----- */
+//HardwareSerial& gsmSerial = Serial1;  // Uses default pins where available
 
 /* ----- Option 3: Software Serial (for basic boards) ----- */
 // #include <SoftwareSerial.h>
@@ -90,14 +90,14 @@ HardwareSerial gsmSerial(2);  // Using Serial2
 //const char* password = "WiFi_Password"; // Your network password
 
 /*-------------------------- For GSM ------------------------------*/
-const char* apn = "your.apn";         // Cellular APN
+const char* apn = "gprs";         // Cellular APN
 const char* gsmUser = nullptr;        // APN username if required
 const char* gsmPass = nullptr;        // APN password if required
 
 // ==================================================================
 //                   GeoLinker CONFIGURATION
 // ==================================================================
-const char* apiKey = "FhBxxxxxxxxx";  // Your GeoLinker API key
+const char* apiKey = "xxxxxxx";  // Your GeoLinker API key
 const char* deviceID = "GeoLinker_tracker"; // Unique device identifier
 const uint16_t updateInterval = 10;   // Data upload interval (seconds)
 const bool enableOfflineStorage = true; // Enable offline data storage
@@ -116,16 +116,26 @@ GeoLinker geo;
 //                   SETUP FUNCTION
 // ==================================================================
 void setup() {
+  
   Serial.begin(115200);
   delay(1000);
 
+  gpsSerial.setTX(GPS_RX);
+  gpsSerial.setRX(GPS_TX);
+  gpsSerial.begin(GPS_BAUD);
+
+  gsmSerial.setTX(GSM_RX);
+  gsmSerial.setRX(GSM_TX);
+  gsmSerial.begin(GSM_BAUD);
+
+
   // Initialize GPS Serial (select one method)
-  gpsSerial.begin(GPS_BAUD, SERIAL_8N1, GPS_RX, GPS_TX);  // Custom pins
-  // gpsSerial.begin(GPS_BAUD);  // Default pins
+  //gpsSerial.begin(GPS_BAUD, SERIAL_8N1, GPS_TX, GPS_RX);
+ // gpsSerial.begin(GPS_BAUD);  // Default pins
 
   // Initialize GSM Serial (select one method)
-  gsmSerial.begin(GSM_BAUD, SERIAL_8N1, GSM_RX, GSM_TX);  // Custom pins
-  // gsmSerial.begin(GSM_BAUD);  // Default pins
+  //gsmSerial.begin(GSM_BAUD, SERIAL_8N1, GSM_TX, GSM_RX);
+  //gsmSerial.begin(GSM_BAUD);  // Default pins
 
   // Core GeoLinker Configuration
   geo.begin(gpsSerial);
@@ -148,7 +158,7 @@ void setup() {
   
   geo.setNetworkMode(GEOLINKER_CELLULAR);
   geo.setModemCredentials(apn, gsmUser, gsmPass);
-  geo.beginModem(gsmSerial, GSM_PWR_PIN, GSM_RST_PIN, true);
+  geo.beginModem(gsmSerial);
   geo.setModemTimeouts(5000, 15000);
   
 
@@ -167,7 +177,7 @@ void loop() {
   });
 
   // Example battery level (optional)
-  geo.setBatteryLevel(89);
+  geo.setBatteryLevel(90);
   
   // ==========================================
   //         GEO LINKER OPERATION
