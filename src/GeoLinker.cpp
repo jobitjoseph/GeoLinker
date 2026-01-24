@@ -341,9 +341,9 @@ uint16_t GeoLinker::sendData(float lat, float lon, String timestamp) {
     HTTPClient http;
     #if defined(ESP8266)
         WiFiClientSecure client; client.setInsecure();
-        http.begin(client, "https://www.circuitdigest.cloud/geolinker");
+        http.begin(client, "https://www.circuitdigest.cloud/api/v1/geolinker");
     #else
-        http.begin("https://www.circuitdigest.cloud/geolinker");
+        http.begin("https://www.circuitdigest.cloud/api/v1/geolinker");
     #endif
     http.addHeader("Authorization", apiKey);
     http.addHeader("Content-Type", "application/json");
