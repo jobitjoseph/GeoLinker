@@ -1,6 +1,6 @@
 {
   "name": "GeoLinker",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "A comprehensive library for GPS tracking and cloud data transmission with WiFi/GSM support. Features offline storage, automatic reconnection, and multi-platform compatibility.",
   "keywords": "gps, geolocation, wifi, gsm, iot, esp32, esp8266, pico, rp2040, uno r4, sim800l",
   "repository": {
