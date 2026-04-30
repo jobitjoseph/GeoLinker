@@ -54,6 +54,9 @@
   #include <WiFi.h>
   #include <WiFiClientSecure.h>
   #include <HTTPClient.h>
+#elif defined(ARDUINO_RASPBERRY_PI_PICO) || defined(ARDUINO_RASPBERRY_PI_PICO_2)
+  #include <HTTPClient.h>
+  
 #else
 
 #endif
