@@ -441,7 +441,7 @@ geo.setDebugLevel(DEBUG_VERBOSE);  // Detailed GPS and network info
 ## 🌐 Cloud Integration
 
 ### API Endpoint
-- **URL**: `https://www.circuitdigest.cloud/geolinker`
+- **URL**: `https://www.circuitdigest.cloud/api/v1/geolinker`
 - **Method**: POST
 - **Headers**: 
   - `Authorization: YOUR_API_KEY`
